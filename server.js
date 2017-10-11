@@ -5,8 +5,10 @@ const schema = require('./data/schema');
 
 const PORT = 3000;
 
+// Create our express app
 const app = express();
 
+// Graphql endpoint
 app.use('/api', bodyParser.json(), graphqlExpress({ schema }));
 
 // Graphiql for testing the API out
