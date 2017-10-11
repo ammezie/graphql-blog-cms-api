@@ -1,8 +1,10 @@
 const { makeExecutableSchema } = require('graphql-tools');
 const resolvers = require('./resolvers');
 
-// Define our schema
+// Define our schema using the GraphQL schema language
 const typeDefs = `
+    scalar DateTime
+
     type User {
         id: Int!
         fisrtName: String!
@@ -10,8 +12,8 @@ const typeDefs = `
         email: String!
         password: String!
         posts: [Post]
-        createdAt: DateTime!
-        updatedAt: DateTime!
+        createdAt: DateTime! # will be generated
+        updatedAt: DateTime! # will be generated
     }
 
     type Post {
@@ -21,8 +23,8 @@ const typeDefs = `
         status: Boolean!
         user: User!
         tags: [Tag]!
-        createdAt: DateTime!
-        updatedAt: DateTime!
+        createdAt: DateTime! # will be generated
+        updatedAt: DateTime! # will be generated
     }
 
     type Tag {
@@ -30,8 +32,8 @@ const typeDefs = `
         name: String!
         description: String
         posts: [Post]
-        createdAt: DateTime!
-        updatedAt: DateTime!
+        createdAt: DateTime! # will be generated
+        updatedAt: DateTime! # will be generated
     }
 
     type Query {
