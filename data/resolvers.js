@@ -55,14 +55,16 @@ const resolvers = {
 
         // Update a particular user
         async updateUser(_, { id, firstName, lastName, email, password }) {
-            return await User.update({
+            const user = await User.findById(id)
+
+            await user.update({
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 password: await bcrypt.hash(password, 10)
-            }, {
-                where: { id: id }
             })
+
+            return user
         },
         addPost(_, args) {
 
