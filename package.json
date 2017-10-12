@@ -20,6 +20,7 @@
   "homepage": "https://github.com/ammezie/graphql-blog-cms-api#readme",
   "dependencies": {
     "apollo-server-express": "^1.1.6",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",

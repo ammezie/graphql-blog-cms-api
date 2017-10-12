@@ -1,5 +1,7 @@
-const { makeExecutableSchema } = require('graphql-tools');
-const resolvers = require('./resolvers');
+'use strict'
+
+const { makeExecutableSchema } = require('graphql-tools')
+const resolvers = require('./resolvers')
 
 // Define our schema using the GraphQL schema language
 const typeDefs = `
@@ -7,7 +9,7 @@ const typeDefs = `
 
     type User {
         id: Int!
-        fisrtName: String!
+        firstName: String!
         lastName: String
         email: String!
         password: String!
@@ -37,10 +39,11 @@ const typeDefs = `
     }
 
     type Query {
-        users: [User]
-        posts: [Post]
+        allUsers: [User]
+        fetchUser(id: Int!): User
+        allPosts: [Post]
         fetchPost(id: Int!): Post
-        tags: [Tag]
+        allTags: [Tag]
         fetchTag(id: Int!): Tag
     }
 
@@ -68,7 +71,7 @@ const typeDefs = `
             content: String!,
             status: Boolean!
             user: Int!,
-            tags: Tag
+            #tags: Tag
         ): Post
         updatePost (
             id: Int!,
@@ -76,7 +79,7 @@ const typeDefs = `
             content: String!,
             status: Boolean!,
             user: Int!,
-            tags: Tag
+            #tags: Tag
         ): Post
         deletePost (
             id: Int!
@@ -97,4 +100,4 @@ const typeDefs = `
     }
 `;
 
-module.exports = makeExecutableSchema({ typeDefs, resolvers });
+module.exports = makeExecutableSchema({ typeDefs, resolvers })

@@ -1,4 +1,5 @@
-'use strict';
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('user', {
     id: {
@@ -26,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
         // associations can be defined here
       }
     }
-  });
-  return User;
-};
+  })
+
+  return User
+}

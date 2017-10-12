@@ -1,10 +1,15 @@
-'use strict';
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   var post = sequelize.define('post', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false
+    },
+    userId: {
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false
     },
     title: {
@@ -26,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         // associations can be defined here
       }
     }
-  });
-  return post;
-};
+  })
+
+  return post
+}

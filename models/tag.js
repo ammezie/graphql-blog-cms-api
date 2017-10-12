@@ -1,4 +1,5 @@
-'use strict';
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   var tag = sequelize.define('tag', {
     id: {
@@ -18,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         // associations can be defined here
       }
     }
-  });
-  return tag;
-};
+  })
+
+  return tag
+}
