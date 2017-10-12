@@ -104,14 +104,34 @@ const resolvers = {
             return await post.destroy()
         },
 
-        addTag(_, args) {
-
+        // Add a new tag
+        async addTag(_, { name, description }) {
+            return await Tag.create({
+                name: name,
+                description: description
+            })
         },
-        updateTag(_, args) {
 
+        // Update a particular tag
+        async updateTag(_, { id, name, description }) {
+            // fetch the tag by it ID
+            const tag = await Tag.findById(id)
+
+            // Update the tag
+            await tag.update({
+                name: name,
+                description: description
+            })
+
+            return tag
         },
-        deleteTag(_, args) {
 
+        // Delete a specified tag
+        async deleteTag(_, { id }) {
+            // fetch the tag by it ID
+            const tag = await Tag.findById(id)
+
+            return await tag.destroy()
         }
     },
 
