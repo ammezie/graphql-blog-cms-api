@@ -55,8 +55,10 @@ const resolvers = {
 
         // Update a particular user
         async updateUser(_, { id, firstName, lastName, email, password }) {
+            // fetch the user by it ID
             const user = await User.findById(id)
 
+            // Update the user
             await user.update({
                 firstName: firstName,
                 lastName: lastName,
@@ -66,11 +68,32 @@ const resolvers = {
 
             return user
         },
-        addPost(_, args) {
 
+        // Add a new post
+        async addPost(_, { title, content, status }) {
+            // TODO: get the authenticated user
+
+            return await Post.create({
+                userId: 1,
+                title: title,
+                content: content,
+                status: status
+            })
         },
-        updatePost(_, args) {
 
+        // Update a particular post
+        async updatePost(_, { id, title, content, status }) {
+            // fetch the post by it ID
+            const post = await Post.findById(id)
+
+            // Update the post
+            await post.update({
+                title: title,
+                content: content,
+                status: status
+            })
+
+            return post
         },
         deletePost(_, args) {
 

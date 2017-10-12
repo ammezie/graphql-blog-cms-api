@@ -69,16 +69,14 @@ const typeDefs = `
         addPost (
             title: String!,
             content: String!,
-            status: Boolean!
-            user: Int!,
+            status: Boolean
             #tags: Tag
         ): Post
         updatePost (
             id: Int!,
             title: String!,
             content: String!,
-            status: Boolean!,
-            user: Int!,
+            status: Boolean,
             #tags: Tag
         ): Post
         deletePost (
