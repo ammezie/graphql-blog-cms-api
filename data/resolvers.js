@@ -95,9 +95,15 @@ const resolvers = {
 
             return post
         },
-        deletePost(_, args) {
 
+        // Delete a specified post
+        async deletePost(_, { id }) {
+            // fetch the post by it ID
+            const post = await Post.findById(id)
+
+            return await post.destroy()
         },
+
         addTag(_, args) {
 
         },
