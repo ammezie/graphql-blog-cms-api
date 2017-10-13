@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const { User, Post, Tag } = require('./connector')
+const { User, Post, Tag } = require('../models');
 const bcrypt = require('bcrypt');
 
 // Define resolvers
@@ -33,7 +33,7 @@ const resolvers = {
 
         // Get a tag by it ID
         async fetchTag(_, { id }) {
-            return await findById(id)
+            return await Tag.findById(id)
         },
     },
 
@@ -77,7 +77,12 @@ const resolvers = {
                 userId: 1,
                 title: title,
                 content: content,
-                status: status
+                status: status,
+                tags: [
+                    { id: 1 }
+                ]
+            }, {
+                include: [ Tag ]
             })
         },
 
@@ -164,6 +169,6 @@ const resolvers = {
     DateTime: {
 
     }
-}
+};
 
-module.exports = resolvers
+module.exports = resolvers;

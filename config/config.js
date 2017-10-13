@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-require('dotenv').config()
+require('dotenv').config();
 
 module.exports = {
   "development": {
@@ -24,4 +24,4 @@ module.exports = {
     "host": process.env.DB_HOST,
     "dialect": "mysql"
   }
-}
+};

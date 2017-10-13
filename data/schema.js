@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
-const { makeExecutableSchema } = require('graphql-tools')
-const resolvers = require('./resolvers')
+const { makeExecutableSchema } = require('graphql-tools');
+const resolvers = require('./resolvers');
 
 // Define our schema using the GraphQL schema language
 const typeDefs = `
@@ -12,7 +12,6 @@ const typeDefs = `
         firstName: String!
         lastName: String
         email: String!
-        password: String!
         posts: [Post]
         createdAt: DateTime! # will be generated
         updatedAt: DateTime! # will be generated
@@ -24,7 +23,7 @@ const typeDefs = `
         content: String!
         status: Boolean!
         user: User!
-        tags: [Tag]!
+        tags: [Tag!]!
         createdAt: DateTime! # will be generated
         updatedAt: DateTime! # will be generated
     }
@@ -98,4 +97,4 @@ const typeDefs = `
     }
 `;
 
-module.exports = makeExecutableSchema({ typeDefs, resolvers })
+module.exports = makeExecutableSchema({ typeDefs, resolvers });

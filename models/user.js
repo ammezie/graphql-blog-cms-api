@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  var User = sequelize.define('user', {
+  const User = sequelize.define('User', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -22,13 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     }
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  })
+  });
 
-  return User
-}
+  User.associate = function(models) {
+    // A user can have many post
+    User.hasMany(models.Post);
+  };
+
+  return User;
+};

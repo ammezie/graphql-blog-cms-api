@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  var post = sequelize.define('post', {
+  const Post = sequelize.define('Post', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -25,13 +25,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: false
     }
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  })
+  });
 
-  return post
-}
+  Post.associate = function(models) {
+    // A post belongs to a user
+    Post.belongsTo(models.User);
+
+    // A post can belong to many tags
+    Post.belongsToMany(models.Tag, { through: 'post_tag' });
+  };
+
+  return Post;
+};
