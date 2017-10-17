@@ -54,7 +54,7 @@ const typeDefs = `
         login (
             email: String!,
             password: String!
-        ): User
+        ): String
         createUser (
             firstName: String!,
             lastName: String,

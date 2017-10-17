@@ -2,6 +2,8 @@
 
 const { User, Post, Tag } = require('../models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 // Define resolvers
 const resolvers = {
@@ -27,7 +29,8 @@ const resolvers = {
         },
 
         // Fetch all tags
-        async allTags() {
+        async allTags(_, args, { user }) {
+            console.log(user)
             return await Tag.all();
         },
 
@@ -39,16 +42,32 @@ const resolvers = {
 
     Mutation: {
         // Handles user login
-        login(_, args) {
+        async login(_, { email, password }) {
+            const user = await User.findOne({ where: { email } });
 
+            if (!user) {
+                throw new Error('No user with that email');
+            }
+
+            const valid = await bcrypt.compare(password, user.password);
+
+            if (!valid) {
+                throw new Error('Incorrect password');
+            }
+
+            // Return json web token
+            return jwt.sign({
+                id: user.id,
+                email: user.email
+            }, process.env.JWT_SECRET, { expiresIn: '1h' });
         },
 
         // Create new user
         async createUser(_, { firstName, lastName, email, password }) {
             return await User.create({
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
+                firstName,
+                lastName,
+                email,
                 password: await bcrypt.hash(password, 10)
             });
         },
@@ -60,9 +79,9 @@ const resolvers = {
 
             // Update the user
             await user.update({
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
+                firstName,
+                lastName,
+                email,
                 password: await bcrypt.hash(password, 10)
             });
 
@@ -70,14 +89,18 @@ const resolvers = {
         },
 
         // Add a new post
-        async addPost(_, { title, content, status, tags }) {
-            // TODO: get the authenticated user
+        async addPost(_, { title, content, status, tags }, { authUser }) {
+            if (!authUser) {
+                throw new Error('You must log in to contnue!')
+            }
+
+            const user = await User.findOne({ where: { id: authUser.id } });
 
             const post = await Post.create({
-                userId: 1, // TODO: replace with ID of logged in user
-                title: title,
-                content: content,
-                status: status
+                userId: user.id,
+                title,
+                content,
+                status
             });
 
             // Assign tags to post
@@ -95,9 +118,9 @@ const resolvers = {
 
             // Update the post
             await post.update({
-                title: title,
-                content: content,
-                status: status
+                title,
+                content,
+                status
             });
 
             return post;
@@ -114,8 +137,8 @@ const resolvers = {
         // Add a new tag
         async addTag(_, { name, description }) {
             return await Tag.create({
-                name: name,
-                description: description
+                name,
+                description
             });
         },
 
@@ -126,8 +149,8 @@ const resolvers = {
 
             // Update the tag
             await tag.update({
-                name: name,
-                description: description
+                name,
+                description
             });
 
             return tag;
