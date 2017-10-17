@@ -114,15 +114,13 @@ const resolvers = {
             });
 
             // Assign tags to post
-            for (const tag of tags) {
-                await post.setTags(tag.id);
-            }
+            await post.setTags(tags);
 
             return post;
         },
 
         // Update a particular post
-        async updatePost(_, { id, title, content, status }, { authUser }) {
+        async updatePost(_, { id, title, content, status, tags }, { authUser }) {
             // Make sure user is logged in
             if (!authUser) {
                 throw new Error('You must log in to contnue!')
@@ -138,6 +136,9 @@ const resolvers = {
                 content,
                 status
             });
+
+            // Assign tags to post
+            await post.setTags(tags);
 
             return post;
         },

@@ -48,10 +48,6 @@ const typeDefs = `
         fetchTag(id: Int!): Tag
     }
 
-    input TagInput {
-        id: Int!
-    }
-
     type Mutation {
         login (
             email: String!,
@@ -75,14 +71,14 @@ const typeDefs = `
             title: String!,
             content: String!,
             status: Boolean
-            tags: [TagInput!]!
+            tags: [Int!]!
         ): Post
         updatePost (
             id: Int!,
             title: String!,
             content: String!,
             status: Boolean,
-            tags: [TagInput!]!
+            tags: [Int!]!
         ): Post
         deletePost (
             id: Int!
