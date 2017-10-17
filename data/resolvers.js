@@ -75,7 +75,12 @@ const resolvers = {
         },
 
         // Update a particular user
-        async updateUser(_, { id, firstName, lastName, email, password }) {
+        async updateUser(_, { id, firstName, lastName, email, password }, { authUser }) {
+            // Make sure user is logged in
+            if (!authUser) {
+                throw new Error('You must log in to contnue!')
+            }
+
             // fetch the user by it ID
             const user = await User.findById(id);
 
@@ -92,6 +97,7 @@ const resolvers = {
 
         // Add a new post
         async addPost(_, { title, content, status, tags }, { authUser }) {
+            // Make sure user is logged in
             if (!authUser) {
                 throw new Error('You must log in to contnue!')
             }
@@ -114,7 +120,12 @@ const resolvers = {
         },
 
         // Update a particular post
-        async updatePost(_, { id, title, content, status }) {
+        async updatePost(_, { id, title, content, status }, { authUser }) {
+            // Make sure user is logged in
+            if (!authUser) {
+                throw new Error('You must log in to contnue!')
+            }
+
             // fetch the post by it ID
             const post = await Post.findById(id);
 
@@ -129,7 +140,12 @@ const resolvers = {
         },
 
         // Delete a specified post
-        async deletePost(_, { id }) {
+        async deletePost(_, { id }, { authUser }) {
+            // Make sure user is logged in
+            if (!authUser) {
+                throw new Error('You must log in to contnue!')
+            }
+
             // fetch the post by it ID
             const post = await Post.findById(id);
 
@@ -137,7 +153,12 @@ const resolvers = {
         },
 
         // Add a new tag
-        async addTag(_, { name, description }) {
+        async addTag(_, { name, description }, { authUser }) {
+            // Make sure user is logged in
+            if (!authUser) {
+                throw new Error('You must log in to contnue!')
+            }
+
             return await Tag.create({
                 name,
                 description
@@ -145,7 +166,12 @@ const resolvers = {
         },
 
         // Update a particular tag
-        async updateTag(_, { id, name, description }) {
+        async updateTag(_, { id, name, description }, { authUser }) {
+            // Make sure user is logged in
+            if (!authUser) {
+                throw new Error('You must log in to contnue!')
+            }
+
             // fetch the tag by it ID
             const tag = await Tag.findById(id);
 
@@ -159,7 +185,12 @@ const resolvers = {
         },
 
         // Delete a specified tag
-        async deleteTag(_, { id }) {
+        async deleteTag(_, { id }, { authUser }) {
+            // Make sure user is logged in
+            if (!authUser) {
+                throw new Error('You must log in to contnue!')
+            }
+
             // fetch the tag by it ID
             const tag = await Tag.findById(id);
 
