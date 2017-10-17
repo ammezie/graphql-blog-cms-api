@@ -20,6 +20,7 @@ const typeDefs = `
     type Post {
         id: Int!
         title: String!
+        slug: String!
         content: String!
         status: Boolean!
         user: User!
@@ -31,6 +32,7 @@ const typeDefs = `
     type Tag {
         id: Int!
         name: String!
+        slug: String!
         description: String
         posts: [Post]
         createdAt: DateTime! # will be generated

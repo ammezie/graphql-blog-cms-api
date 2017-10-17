@@ -29,7 +29,8 @@
     "graphql-tools": "^2.3.0",
     "jsonwebtoken": "^8.1.0",
     "mysql2": "^1.4.2",
-    "sequelize": "^4.13.8"
+    "sequelize": "^4.13.8",
+    "slugify": "^1.2.1"
   },
   "devDependencies": {}
 }

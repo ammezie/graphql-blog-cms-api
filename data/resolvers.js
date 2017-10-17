@@ -5,6 +5,7 @@ const { Kind } = require('graphql/language');
 const { User, Post, Tag } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const slugify = require('slugify');
 require('dotenv').config();
 
 // Define resolvers
@@ -107,6 +108,7 @@ const resolvers = {
             const post = await Post.create({
                 userId: user.id,
                 title,
+                slug: slugify(title, { lower: true }),
                 content,
                 status
             });
@@ -132,6 +134,7 @@ const resolvers = {
             // Update the post
             await post.update({
                 title,
+                slug: slugify(title, { lower: true }),
                 content,
                 status
             });
@@ -161,6 +164,7 @@ const resolvers = {
 
             return await Tag.create({
                 name,
+                slug: slugify(name, { lower: true }),
                 description
             });
         },
@@ -178,6 +182,7 @@ const resolvers = {
             // Update the tag
             await tag.update({
                 name,
+                slug: slugify(name, { lower: true }),
                 description
             });
 
