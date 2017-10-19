@@ -205,27 +205,27 @@ const resolvers = {
 
     User: {
         // Fetch all posts created by a user
-        posts(user) {
-            return user.getPosts();
+        async posts(user) {
+            return await user.getPosts();
         }
     },
 
     Post: {
         // Fetch the author of a particular post
-        user(post) {
-            return post.getUser();
+        async user(post) {
+            return await post.getUser();
         },
 
         // Fetch alls tags that a post belongs to
-        tags(post) {
-            return post.getTags();
+        async tags(post) {
+            return await post.getTags();
         }
     },
 
     Tag: {
         // Fetch all posts belonging to a tag
-        posts(tag) {
-            return tag.getPosts();
+        async posts(tag) {
+            return await tag.getPosts();
         }
     },
 
