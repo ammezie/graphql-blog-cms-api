@@ -11,7 +11,7 @@ require('dotenv').config();
 // Define resolvers
 const resolvers = {
     Query: {
-        // Fetach all users
+        // Fetch all users
         async allUsers() {
            return await User.all();
         },
@@ -33,7 +33,6 @@ const resolvers = {
 
         // Fetch all tags
         async allTags(_, args, { user }) {
-            console.log(user)
             return await Tag.all();
         },
 
@@ -62,7 +61,7 @@ const resolvers = {
             return jwt.sign({
                 id: user.id,
                 email: user.email
-            }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            }, process.env.JWT_SECRET, { expiresIn: '1y' });
         },
 
         // Create new user
@@ -79,7 +78,7 @@ const resolvers = {
         async updateUser(_, { id, firstName, lastName, email, password }, { authUser }) {
             // Make sure user is logged in
             if (!authUser) {
-                throw new Error('You must log in to contnue!')
+                throw new Error('You must log in to continue!')
             }
 
             // fetch the user by it ID
@@ -100,7 +99,7 @@ const resolvers = {
         async addPost(_, { title, content, status, tags }, { authUser }) {
             // Make sure user is logged in
             if (!authUser) {
-                throw new Error('You must log in to contnue!')
+                throw new Error('You must log in to continue!')
             }
 
             const user = await User.findOne({ where: { id: authUser.id } });
@@ -123,7 +122,7 @@ const resolvers = {
         async updatePost(_, { id, title, content, status, tags }, { authUser }) {
             // Make sure user is logged in
             if (!authUser) {
-                throw new Error('You must log in to contnue!')
+                throw new Error('You must log in to continue!')
             }
 
             // fetch the post by it ID
@@ -147,7 +146,7 @@ const resolvers = {
         async deletePost(_, { id }, { authUser }) {
             // Make sure user is logged in
             if (!authUser) {
-                throw new Error('You must log in to contnue!')
+                throw new Error('You must log in to continue!')
             }
 
             // fetch the post by it ID
@@ -160,7 +159,7 @@ const resolvers = {
         async addTag(_, { name, description }, { authUser }) {
             // Make sure user is logged in
             if (!authUser) {
-                throw new Error('You must log in to contnue!')
+                throw new Error('You must log in to continue!')
             }
 
             return await Tag.create({
@@ -174,7 +173,7 @@ const resolvers = {
         async updateTag(_, { id, name, description }, { authUser }) {
             // Make sure user is logged in
             if (!authUser) {
-                throw new Error('You must log in to contnue!')
+                throw new Error('You must log in to continue!')
             }
 
             // fetch the tag by it ID
@@ -194,7 +193,7 @@ const resolvers = {
         async deleteTag(_, { id }, { authUser }) {
             // Make sure user is logged in
             if (!authUser) {
-                throw new Error('You must log in to contnue!')
+                throw new Error('You must log in to continue!')
             }
 
             // fetch the tag by it ID
