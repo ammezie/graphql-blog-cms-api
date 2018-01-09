@@ -7,13 +7,13 @@ A Blog CMS API powered by GraphQL and Apollo server
 Clone the project repository by running the command below if you use SSH
 
 ```bash
-git@github.com:ammezie/graphql-blog-cms-api.git
+git clone git@github.com:ammezie/graphql-blog-cms-api.git
 ```
 
 If you use https, use this instead
 
 ```bash
-https://github.com/ammezie/graphql-blog-cms-api.git
+git clone https://github.com/ammezie/graphql-blog-cms-api.git
 ```
 
 After cloning, run:
