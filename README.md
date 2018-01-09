@@ -22,6 +22,17 @@ After cloning, run:
 npm install
 ```
 
+Rename `.env.example` to `.env` then fill in your database detail and your JWT secret:
+
+```txt
+NODE_ENV=development
+DB_HOST=localhost
+DB_USERNAME=root
+DB_PASSWORD=
+DB_NAME=graphql_blog_cms
+JWT_SECRET=somereallylongsecretkey
+```
+
 And finally, start the application:
 
 ```bash
