@@ -33,6 +33,12 @@ DB_NAME=graphql_blog_cms
 JWT_SECRET=somereallylongsecretkey
 ```
 
+Then run the migration:
+
+```bash
+sequelize db:migrate
+```
+
 And finally, start the application:
 
 ```bash
